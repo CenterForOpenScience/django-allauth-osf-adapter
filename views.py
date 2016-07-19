@@ -1,16 +1,12 @@
 import requests
+
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-
-from allauth.account.adapter import DefaultAccountAdapter
-
 from allauth.utils import valid_email_or_none
-
 from allauth.account.utils import user_email, user_username, user_field
-
-from .apps import OsfOauth2AdapterConfig
 from allauth.socialaccount.providers.oauth2.views import OAuth2Adapter, OAuth2LoginView, OAuth2CallbackView
 
-from osf_oauth2_adapter.provider import OSFProvider
+from .apps import OsfOauth2AdapterConfig
+from .provider import OSFProvider
 
 
 class OSFOAuth2Adapter(OAuth2Adapter, DefaultSocialAccountAdapter):
@@ -61,6 +57,7 @@ class OSFOAuth2Adapter(OAuth2Adapter, DefaultSocialAccountAdapter):
             request,
             extra_data.json()
         )
+
 
 oauth2_login = OAuth2LoginView.adapter_view(OSFOAuth2Adapter)
 oauth2_callback = OAuth2CallbackView.adapter_view(OSFOAuth2Adapter)

@@ -1,8 +1,8 @@
-from .apps import OsfOauth2AdapterConfig
 from allauth.socialaccount import providers
 from allauth.socialaccount.providers.base import ProviderAccount
 from allauth.socialaccount.providers.oauth2.provider import OAuth2Provider
 
+from .apps import OsfOauth2AdapterConfig
 
 
 class OSFAccount(ProviderAccount):
@@ -22,6 +22,7 @@ class OSFAccount(ProviderAccount):
             )
             if value is not None
         )
+
 
 class OSFProvider(OAuth2Provider):
     id = 'osf'
@@ -46,5 +47,6 @@ class OSFProvider(OAuth2Provider):
 
     def get_default_scope(self):
         return OsfOauth2AdapterConfig.default_scopes
+
 
 providers.registry.register(OSFProvider)
